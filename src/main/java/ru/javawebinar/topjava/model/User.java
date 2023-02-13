@@ -82,6 +82,12 @@ public class User extends AbstractNamedEntity {
     }
 
     @Override
+    public int compareTo(User u) {
+        int result = name.compareTo(u.name);
+        return result != 0 ? result : email.compareTo(u.email);
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +

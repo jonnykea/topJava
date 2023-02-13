@@ -17,6 +17,8 @@ public abstract class AbstractNamedEntity extends AbstractBaseEntity {
         return this.name;
     }
 
+    public abstract int compareTo(User u);
+
     @Override
     public String toString() {
         return super.toString() + '(' + name + ')';
