@@ -7,14 +7,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+
+import static ru.javawebinar.topjava.util.DateTimeUtil.strToDate;
+import static ru.javawebinar.topjava.util.DateTimeUtil.strToTime;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
@@ -23,10 +29,10 @@ public class MealServlet extends HttpServlet {
     private ConfigurableApplicationContext appCtx;
 
     @Override
-    public void init() {
-        try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
-            mealRestController = appCtx.getBean(MealRestController.class);
-        }
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        mealRestController = appCtx.getBean(MealRestController.class);
     }
 
     @Override
@@ -76,8 +82,16 @@ public class MealServlet extends HttpServlet {
             case "all":
             default:
                 log.info("getAll");
-                request.setAttribute("meals",
-                        mealRestController.getAll());
+                String fromDateStr = request.getParameter("fromDate");
+                String toDateStr = request.getParameter("toDate");
+                String fromTimeStr = request.getParameter("fromTime");
+                String toTimeStr = request.getParameter("toTime");
+
+                LocalDate fromDate = strToDate(fromDateStr);
+                LocalDate toDate = strToDate(toDateStr);
+                LocalTime fromTime = strToTime(fromTimeStr);
+                LocalTime toTime = strToTime(toTimeStr);
+                request.setAttribute("meals", mealRestController.getFiltered(fromDate, toDate, fromTime, toTime));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }

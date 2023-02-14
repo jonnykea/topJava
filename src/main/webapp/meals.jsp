@@ -21,6 +21,28 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
+
+    <form method="get" action=meals>
+        <dl>
+            <dt>From date(inclusive)</dt>
+            <dd><input type="date" value="${param.fromDate}" name="fromDate" ></dd>
+        </dl>
+        <dl>
+            <dt>To date(inclusive):</dt>
+            <dd><input type="date" value="${param.toDate}" name="toDate" ></dd>
+        </dl>
+        <dl>
+            <dt>From time(inclusive):</dt>
+            <dd><input type="time" value="${param.fromTime}" name="fromTime" ></dd>
+        </dl>
+        <dl>
+            <dt>To time(exclusive):</dt>
+            <dd><input type="time" value="${param.toTime}" name="toTime" ></dd>
+        </dl>
+        <br/>
+        <button type="submit">Filter</button>
+    </form>
+
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
