@@ -1,19 +1,19 @@
 package ru.javawebinar.topjava.repository.inmemory;
 
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public class InMemoryMealRepository implements MealRepository {
     private final Map<Integer, Map<Integer, Meal>> repository = new ConcurrentHashMap<>();
     private final AtomicInteger counter = new AtomicInteger(0);
@@ -24,42 +24,54 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public Meal save(int userId, Meal meal) {
-        Map<Integer, Meal> meals = repository.get(userId);
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
-            meals.put(meal.getId(), meal);
+            repository.computeIfAbsent(userId, HashMap::new).put(meal.getId(), meal);
             return meal;
         }
-        // handle case: update, but not present in storage
-        return meals.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
+        Map<Integer, Meal> meals;
+        if ((meals = repository.get(userId)) != null) {
+            // handle case: update, but not present in storage
+            return meals.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
+        }
+        return null;
     }
 
     @Override
     public boolean delete(int userId, int id) {
-        Map<Integer, Meal> meals = repository.get(userId);
-        return meals.remove(id) != null;
+        Map<Integer, Meal> meals;
+        if ((meals = repository.get(userId)) != null) {
+            return meals.remove(id) != null;
+        }
+        throw new NotFoundException("Not found entity with " + userId);
     }
 
     @Override
     public Meal get(int userId, int id) {
-        Map<Integer, Meal> meals = repository.get(userId);
-        return meals.get(id);
+        if (repository.containsKey(userId)) {
+            Map<Integer, Meal> meals = repository.get(userId);
+            return meals.get(id);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Collection<Meal> getAll(int userId) {
-        return repository.get(userId).values().stream()
-                .sorted(Comparator.comparing(Meal::getDate).reversed())
-                .collect(Collectors.toList());
+        if (repository.containsKey(userId)) {
+            return new ArrayList<>(repository.get(userId).values()).stream()
+                    .sorted(Comparator.comparing(Meal::getDate).reversed())
+                    .collect(Collectors.toList());
+        } else {
+            return null;
+        }
     }
 
     @Override
     public List<Meal> getFilteredByDates(int userId, LocalDateTime startTime, LocalDateTime endTime) {
-        return repository.get(userId).values().stream()
+        return new ArrayList<>(repository.get(userId).values()).stream()
                 .filter(meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDateTime(), startTime, endTime))
                 .sorted(Comparator.comparing(Meal::getDate).reversed())
                 .collect(Collectors.toList());
-
     }
 }
-
