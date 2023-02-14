@@ -20,6 +20,7 @@ public class InMemoryMealRepository implements MealRepository {
 
     {
         MealsUtil.meals.forEach(m -> this.save(1, m));
+        MealsUtil.meals.forEach(m -> this.save(2, m));
     }
 
     @Override
@@ -31,7 +32,6 @@ public class InMemoryMealRepository implements MealRepository {
         }
         Map<Integer, Meal> meals;
         if ((meals = repository.get(userId)) != null) {
-            // handle case: update, but not present in storage
             return meals.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
         }
         return null;
@@ -68,9 +68,9 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public List<Meal> getFilteredByDates(int userId, LocalDateTime startTime, LocalDateTime endTime) {
+    public Collection<Meal> getFilteredByDates(int userId, LocalDateTime fromTime, LocalDateTime toTime) {
         return new ArrayList<>(repository.get(userId).values()).stream()
-                .filter(meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDateTime(), startTime, endTime))
+                .filter(meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDateTime(), fromTime, toTime))
                 .sorted(Comparator.comparing(Meal::getDate).reversed())
                 .collect(Collectors.toList());
     }
