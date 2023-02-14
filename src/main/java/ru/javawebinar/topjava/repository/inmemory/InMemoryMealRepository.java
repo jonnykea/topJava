@@ -30,8 +30,8 @@ public class InMemoryMealRepository implements MealRepository {
             repository.computeIfAbsent(userId, HashMap::new).put(meal.getId(), meal);
             return meal;
         }
-        Map<Integer, Meal> meals;
-        if ((meals = repository.get(userId)) != null) {
+        Map<Integer, Meal> meals = repository.get(userId);
+        if (meals != null) {
             return meals.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
         }
         return null;
@@ -39,8 +39,8 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public boolean delete(int userId, int id) {
-        Map<Integer, Meal> meals;
-        if ((meals = repository.get(userId)) != null) {
+        Map<Integer, Meal> meals = repository.get(userId);
+        if (meals != null) {
             return meals.remove(id) != null;
         }
         throw new NotFoundException("Not found entity with " + userId);
@@ -48,7 +48,7 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public Meal get(int userId, int id) {
-        if (repository.containsKey(userId)) {
+        if (repository.get(userId) != null) {
             Map<Integer, Meal> meals = repository.get(userId);
             return meals.get(id);
         } else {
@@ -57,19 +57,15 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public Collection<Meal> getAll(int userId) {
-        if (repository.containsKey(userId)) {
-            return new ArrayList<>(repository.get(userId).values()).stream()
-                    .sorted(Comparator.comparing(Meal::getDate).reversed())
-                    .collect(Collectors.toList());
-        } else {
-            return null;
-        }
+    public List<Meal> getAll(int userId) {
+        return repository.get(userId).values().stream()
+                .sorted(Comparator.comparing(Meal::getDate).reversed())
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<Meal> getFilteredByDates(int userId, LocalDateTime fromTime, LocalDateTime toTime) {
-        return new ArrayList<>(repository.get(userId).values()).stream()
+    public List<Meal> getFilteredByDates(int userId, LocalDateTime fromTime, LocalDateTime toTime) {
+        return repository.get(userId).values().stream()
                 .filter(meal -> DateTimeUtil.isBetweenHalfOpen(meal.getDateTime(), fromTime, toTime))
                 .sorted(Comparator.comparing(Meal::getDate).reversed())
                 .collect(Collectors.toList());
