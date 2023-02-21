@@ -94,17 +94,17 @@ public class MealServiceTest {
     }
 
     @Test
-    public void deleteSomebodyElesesMeal() {
+    public void deleteForeignMeal() {
         assertThrows(NotFoundException.class, () -> service.delete(MEAL_ID, ADMIN_ID));
     }
 
     @Test
-    public void getSomebodyElesesMeal() {
+    public void getForeignMeal() {
         assertThrows(NotFoundException.class, () -> service.get(MEAL_ID, ADMIN_ID));
     }
 
     @Test
-    public void updateSomebodyElesesMeal() {
+    public void updateForeignMeal() {
         assertThrows(NotFoundException.class, () -> {
             Meal updated = getUpdated();
             service.update(updated, ADMIN_ID);
@@ -112,17 +112,17 @@ public class MealServiceTest {
     }
 
     @Test
-    public void deleteNotFound() {
+    public void deleteNotExisted() {
         assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND, USER_ID));
     }
 
     @Test
-    public void getNotFoundl() {
+    public void getNotExisted() {
         assertThrows(NotFoundException.class, () -> service.get(NOT_FOUND, USER_ID));
     }
 
     @Test
-    public void updateNotFound() {
+    public void updateNotExisted() {
         assertThrows(NotFoundException.class, () -> {
             Meal updated = getUpdated();
             updated.setId(NOT_FOUND);

@@ -15,8 +15,8 @@ public class MealTestData {
     public static final Meal USER_MEAL1 = new Meal(ADMIN_ID + 2, LocalDateTime.of(2023, 2, 15, 11, 0), "Предыдущий день", 2100);
     public static final Meal USER_MEAL2 = new Meal(MEAL_ID, LocalDateTime.of(2023, 2, 16, 10, 0), "Завтрак", 500);
     public static final Meal USER_MEAL3 = new Meal(ADMIN_ID + 4, LocalDateTime.of(2023, 2, 16, 13, 0), "Обед", 1000);
-    public static final Meal USER_MEAL4 = new Meal(ADMIN_ID + 6, LocalDateTime.of(2023, 2, 17, 0, 0), "Еда на граничное значение", 100);
-    public static final Meal USER_MEAL5 = new Meal(ADMIN_ID + 5, LocalDateTime.of(2023, 2, 17, 20, 0), "Ужин", 500);
+    public static final Meal USER_MEAL4 = new Meal(ADMIN_ID + 5, LocalDateTime.of(2023, 2, 17, 20, 0), "Ужин", 500);
+    public static final Meal USER_MEAL5 = new Meal(ADMIN_ID + 6, LocalDateTime.of(2023, 2, 17, 23, 59), "Еда на граничное значение", 100);
     public static final Meal USER_MEAL6 = new Meal(ADMIN_ID + 7, LocalDateTime.of(2023, 2, 18, 10, 0), "Завтрак", 1000);
     public static final Meal USER_MEAL7 = new Meal(ADMIN_ID + 8, LocalDateTime.of(2023, 2, 18, 13, 0), "Обед", 500);
     public static final Meal USER_MEAL8 = new Meal(ADMIN_ID + 9, LocalDateTime.of(2023, 2, 18, 20, 0), "Ужин", 410);
@@ -26,7 +26,6 @@ public class MealTestData {
     public static final Meal ADMIN_MEAL2 = new Meal(ADMIN_ID + 12, LocalDateTime.of(2023, 2, 17, 10, 0), "Перекус", 120);
     public static final Meal ADMIN_MEAL3 = new Meal(ADMIN_ID + 13, LocalDateTime.of(2023, 2, 17, 13, 30), "Обед", 600);
     public static final Meal ADMIN_MEAL4 = new Meal(ADMIN_ID + 14, LocalDateTime.of(2023, 2, 17, 19, 0), "Ужин в ресторане", 1200);
-
     public static final Meal MEAL = USER_MEAL2;
 
     public static final Meal[] ALL_MEALS_OF_USER_SORTED = {USER_MEAL9, USER_MEAL8, USER_MEAL7, USER_MEAL6, USER_MEAL5, USER_MEAL4, USER_MEAL3, USER_MEAL2, USER_MEAL1};
@@ -40,7 +39,7 @@ public class MealTestData {
         Meal updated = new Meal(MEAL);
         updated.setDescription("Макароны");
         updated.setCalories(350);
-        updated.setDateTime(LocalDateTime.of(2023, 2, 15, 0, 00));
+        updated.setDateTime(LocalDateTime.of(2023, 2, 15, 0, 0));
         return updated;
     }
 
