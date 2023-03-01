@@ -18,7 +18,7 @@ import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
         @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name, u.email"),
 })
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
+@Table(name = "users")
 public class User extends AbstractNamedEntity {
 
     public static final String DELETE = "User.delete";
@@ -39,7 +39,7 @@ public class User extends AbstractNamedEntity {
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
 
-    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
+    @Column(name = "registered", nullable = false, updatable = false, columnDefinition = "timestamp default now()")
     @NotNull
     private Date registered = new Date();
 
