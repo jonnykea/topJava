@@ -85,12 +85,7 @@ public class JdbcMealRepository implements MealRepository {
                 ROW_MAPPER, userId, convertToLocalDate(startDateTime), convertToLocalDate(endDateTime));
     }
 
-    @Override
-    public Meal getWithUser(int id, int userId) {
-        return null;
-    }
-
-    protected Object convertToLocalDate(LocalDateTime localDateTime){
+    protected Object convertToLocalDate(LocalDateTime localDateTime) {
         return Timestamp.valueOf(localDateTime);
     }
 }

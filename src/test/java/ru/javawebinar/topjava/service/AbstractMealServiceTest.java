@@ -17,10 +17,10 @@ import static ru.javawebinar.topjava.MealTestData.getUpdated;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.*;
 
-abstract public class AbstractMealServiceTest extends AbstractBaseServiceTest{
+abstract public class AbstractMealServiceTest extends AbstractBaseServiceTest {
 
     @Autowired
-    private MealService service;
+    protected MealService service;
 
     @Test
     public void delete() {
@@ -100,12 +100,5 @@ abstract public class AbstractMealServiceTest extends AbstractBaseServiceTest{
     @Test
     public void getBetweenWithNullDates() {
         MEAL_MATCHER.assertMatch(service.getBetweenInclusive(null, null, USER_ID), meals);
-    }
-
-    @Test
-    public void getWithUser() {
-        Meal actual = service.getWithUser(ADMIN_MEAL_ID, ADMIN_ID);
-        MEAL_MATCHER.assertMatch(actual, adminMeal1);
-        USER_MATCHER.assertMatch(actual.getUser(), admin);
     }
 }
