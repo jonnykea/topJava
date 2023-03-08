@@ -83,11 +83,4 @@ abstract public class AbstractUserServiceTest extends AbstractBaseServiceTest {
         List<User> all = service.getAll();
         USER_MATCHER.assertMatch(all, admin, guest, user);
     }
-/*
-    @Test
-    public void getWithMealsQuery() {
-        User newUser = service.getWithMeals(USER_ID);
-        USER_MATCHER.assertMatch(newUser, user);
-        MEAL_MATCHER.assertMatch(newUser.getMeals(), MealTestData.meals);
-    }*/
 }

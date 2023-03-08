@@ -1,12 +1,12 @@
 package ru.javawebinar.topjava.service;
 
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -29,7 +29,7 @@ abstract public class AbstractBaseServiceTest {
 
     private static final Logger log = getLogger("result");
 
-    private static final StringBuilder results = new StringBuilder();
+    private static StringBuilder results = new StringBuilder();
 
     @Rule
     // http://stackoverflow.com/questions/14892125/what-is-the-best-practice-to-determine-the-execution-time-of-the-bussiness-relev
@@ -41,6 +41,11 @@ abstract public class AbstractBaseServiceTest {
             log.info(result + " ms\n");
         }
     };
+
+    @BeforeClass
+    public static void clearResults() {
+        results = new StringBuilder();
+    }
 
     @AfterClass
     public static void printResult() {

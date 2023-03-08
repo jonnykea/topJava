@@ -12,12 +12,11 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class JdbcMealRepository implements MealRepository {
+abstract public class JdbcMealRepository<T> implements MealRepository {
 
     private static final RowMapper<Meal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Meal.class);
 
@@ -85,7 +84,5 @@ public class JdbcMealRepository implements MealRepository {
                 ROW_MAPPER, userId, convertToLocalDate(startDateTime), convertToLocalDate(endDateTime));
     }
 
-    protected Object convertToLocalDate(LocalDateTime localDateTime) {
-        return Timestamp.valueOf(localDateTime);
-    }
+    abstract protected T convertToLocalDate(LocalDateTime localDateTime);
 }
