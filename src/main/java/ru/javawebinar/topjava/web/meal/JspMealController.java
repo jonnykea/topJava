@@ -74,7 +74,7 @@ public class JspMealController extends AbstractMealController {
         return "meals";
     }
 
-    @GetMapping()
+    @GetMapping
     public String get(HttpServletRequest request) {
         request.setAttribute("meals", super.getAll());
         return "meals";
