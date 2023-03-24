@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "180d37d6-675d-4994-8edc-d4f10fabaf97",
+		"name": "USER rest profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26536196"
+	},
+	"item": [
+		{
+			"name": "GET own data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topjava/rest/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topjava",
+						"rest",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 100000,\r\n    \"name\": \"User\",\r\n    \"email\": \"user@yandex.ru\",\r\n    \"password\": \"password\",\r\n    \"enabled\": true,\r\n    \"registered\": \"2023-03-24T02:43:12.646+00:00\",\r\n    \"roles\": [\"USER\"],\r\n    \"caloriesPerDay\": 2000\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/topjava/rest/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topjava",
+						"rest",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

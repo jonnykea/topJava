@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "a8472b11-69a7-4d56-902c-351a2ef32356",
+		"name": "ADMIN rest test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26536196"
+	},
+	"item": [
+		{
+			"name": "GET all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topjava/rest/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topjava",
+						"rest",
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user via id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topjava/rest/admin/users/100000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topjava",
+						"rest",
+						"admin",
+						"users",
+						"100000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user by email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topjava/rest/admin/users/by-email?email=user@yandex.ru",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topjava",
+						"rest",
+						"admin",
+						"users",
+						"by-email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "user@yandex.ru"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
