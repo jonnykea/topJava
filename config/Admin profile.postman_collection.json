@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "22422918-4d01-4dac-affb-33281f98a58e",
+		"name": "Admin profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26536196"
+	},
+	"item": [
+		{
+			"name": "GET users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{admin}}",
+					"host": [
+						"{{admin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{admin}}/100000",
+					"host": [
+						"{{admin}}"
+					],
+					"path": [
+						"100000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user with meals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{admin}}/100001/with-meals",
+					"host": [
+						"{{admin}}"
+					],
+					"path": [
+						"100001",
+						"with-meals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user by email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{admin}}/by-email?email=user@yandex.ru",
+					"host": [
+						"{{admin}}"
+					],
+					"path": [
+						"by-email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "user@yandex.ru"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 100000,\r\n        \"name\": \"UserUpdate\",\r\n        \"email\": \"user@yandex.ru\",\r\n        \"password\": \"password\",\r\n        \"enabled\": true,\r\n        \"registered\": \"2023-03-24T07:13:31.647+00:00\",\r\n        \"roles\": [\r\n            \"USER\"\r\n        ],\r\n        \"caloriesPerDay\": 2000,\r\n        \"meals\": null\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{admin}}/100000",
+					"host": [
+						"{{admin}}"
+					],
+					"path": [
+						"100000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": null,\r\n        \"name\": \"New\",\r\n        \"email\": \"NEW@yandex.ru\",\r\n        \"password\": \"password\",\r\n        \"enabled\": true,\r\n        \"registered\": \"2023-03-24T07:13:31.647+00:00\",\r\n        \"roles\": [\r\n            \"USER\"\r\n        ],\r\n        \"caloriesPerDay\": 2000\r\n        \r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{admin}}",
+					"host": [
+						"{{admin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{admin}}/100014",
+					"host": [
+						"{{admin}}"
+					],
+					"path": [
+						"100014"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "admin",
+			"value": "http://localhost:8080/topjava/rest/admin/users"
+		}
+	]
+}

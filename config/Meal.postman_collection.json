@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "061fc7fd-0fd0-4eb1-ae41-c78757a28088",
+		"name": "Meal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26536196"
+	},
+	"item": [
+		{
+			"name": "GET all meals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{meal}}",
+					"host": [
+						"{{meal}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET meal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{meal}}/100006",
+					"host": [
+						"{{meal}}"
+					],
+					"path": [
+						"100006"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE meal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 100009,\r\n    \"dateTime\": \"2020-01-31T20:00:00\",\r\n    \"description\": \"Ужин\",\r\n    \"calories\": 2000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{meal}}/100009",
+					"host": [
+						"{{meal}}"
+					],
+					"path": [
+						"100009"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"id\": null,\r\n        \"dateTime\": \"2022-01-30T10:00:00\",\r\n        \"description\": \"Ужин\",\r\n        \"calories\": 5000\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{meal}}",
+					"host": [
+						"{{meal}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{meal}}/100009",
+					"host": [
+						"{{meal}}"
+					],
+					"path": [
+						"100009"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET meals with filter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{meal}}/filter?startDateTime=2020-01-30T10:00:00&endDateTime=2020-01-30T21:00:00",
+					"host": [
+						"{{meal}}"
+					],
+					"path": [
+						"filter"
+					],
+					"query": [
+						{
+							"key": "startDateTime",
+							"value": "2020-01-30T10:00:00"
+						},
+						{
+							"key": "endDateTime",
+							"value": "2020-01-30T21:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET meals with filter (nullable)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{meal}}/filter?startDate=2020-01-30&endDate=2020-01-30",
+					"host": [
+						"{{meal}}"
+					],
+					"path": [
+						"filter"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-01-30"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-01-30"
+						},
+						{
+							"key": "endTime",
+							"value": "20:00",
+							"disabled": true
+						},
+						{
+							"key": "startTime",
+							"value": "10:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "meal",
+			"value": "http://localhost:8080/topjava/rest/meals"
+		}
+	]
+}
