@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.util;
+package ru.javawebinar.topjava.web.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

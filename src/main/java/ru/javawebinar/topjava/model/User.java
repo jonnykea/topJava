@@ -144,6 +144,10 @@ public class User extends AbstractNamedEntity {
         return password;
     }
 
+    public void setMeal(List<Meal> meals) {
+        this.meals = meals;
+    }
+
     public List<Meal> getMeals() {
         return meals;
     }

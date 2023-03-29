@@ -22,9 +22,9 @@ class JsonUtilTest {
 
     @Test
     void readWriteValues() {
-        String json = JsonUtil.writeValue(mealsUser);
+        String json = JsonUtil.writeValue(userMeals);
         log.info(json);
         List<Meal> actual = JsonUtil.readValues(json, Meal.class);
-        MEAL_MATCHER.assertMatch(actual, mealsUser);
+        MEAL_MATCHER.assertMatch(actual, userMeals);
     }
 }
