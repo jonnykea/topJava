@@ -38,6 +38,18 @@ function updateTable() {
     });
 }
 
+function updateDataTable(data) {
+    ctx.datatableApi.clear().rows.add(data).draw();
+}
+
+function filterByDateTime() {
+    $.ajax({
+        type: "GET",
+        url: ctx.ajaxUrl + "filter",
+        data: $("#filterForForm").serialize()
+    }).done(updateDataTable);
+}
+
 function save() {
     debugger;
     $.ajax({
