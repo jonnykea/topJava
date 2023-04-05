@@ -50,6 +50,11 @@ function filterByDateTime() {
     }).done(updateDataTable);
 }
 
+function clearFilter() {
+    $("#filterForForm")[0].reset();
+    updateTable();
+}
+
 function save() {
     debugger;
     $.ajax({

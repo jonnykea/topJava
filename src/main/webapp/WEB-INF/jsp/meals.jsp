@@ -32,10 +32,16 @@
                 <input class="form-control" type="time" id="endTimeInput" name="endTime" value="${param.endTime}">
             </div>
         </form>
-        <button class="btn btn-primary" onclick="filterByDateTime()">
-            <span class="fa fa-filter"></span>
-            <spring:message code="meal.filter"/>
-        </button>
+        <div>
+            <button class="btn btn-danger" onclick="clearFilter()">
+                <span class="fa fa-close"></span>
+                <spring:message code="common.cancel"/>
+            </button>
+            <button class="btn btn-primary" onclick="filterByDateTime()">
+                <span class="fa fa-filter"></span>
+                <spring:message code="meal.filter"/>
+            </button>
+        </div>
         <hr>
         <%--    <a href="meals/create"><spring:message code="meal.add"/></a>--%>
         <button class="btn btn-primary" onclick="add()">
