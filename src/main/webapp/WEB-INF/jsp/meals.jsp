@@ -56,7 +56,7 @@
             </thead>
             <c:forEach items="${meals}" var="meal">
                 <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealTo"/>
-                <tr data-mealExcess="${meal.excess}">
+                <tr id="${meal.id}" data-meal-excess="${meal.excess}">
                     <td>
                             <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
                             <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
@@ -67,7 +67,7 @@
                     <td>${meal.calories}</td>
                         <%--                <td><a href="meals/update?id=${meal.id}"><spring:message code="common.update"/></a></td>--%>
                     <td><a><span class="fa fa-pencil"></span></a></td>
-                    <td><a class="delete" id="${meal.id}"><span class="fa fa-remove"></span></a></td>
+                    <td><a class="delete"><span class="fa fa-remove"></span></a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -92,7 +92,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description" class="col-form-label"><spring:message code="meal.description"/></label>
+                        <label for="description" class="col-form-label"><spring:message
+                                code="meal.description"/></label>
                         <input type="text" class="form-control" id="description" name="description"
                                placeholder="<spring:message code="meal.description"/>">
                     </div>
