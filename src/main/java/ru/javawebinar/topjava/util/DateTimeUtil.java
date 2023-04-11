@@ -42,6 +42,8 @@ public class DateTimeUtil {
 
     public static @Nullable
     LocalDateTime parseLocalDateTime(@Nullable String str) {
-        return StringUtils.hasLength(str) ? LocalDateTime.parse(str) : null;
+        // change str for controller
+        String correctedStr = str.replace(" ", "T");
+        return StringUtils.hasLength(correctedStr) ? LocalDateTime.parse(correctedStr) : null;
     }
 }

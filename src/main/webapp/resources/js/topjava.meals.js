@@ -65,3 +65,41 @@ $(function () {
         })
     );
 });
+
+$('#startDate').datetimepicker({
+    timepicker: false,
+    format: 'Y-m-d',
+    formatDate: 'Y-m-d',
+    onClose:function(dp,$input){
+        $('#endDate').datetimepicker('setOptions',{minDate: $input.val()})
+    }
+});
+
+$('#endDate').datetimepicker({
+    timepicker: false,
+    format: 'Y-m-d',
+    formatDate: 'Y-m-d',
+    onClose:function(dp,$input){
+        $('#startDate').datetimepicker('setOptions',{maxDate: $input.val()})
+    }
+});
+
+$('#startTime').datetimepicker({
+    datepicker: false,
+    format: 'H:i',
+    onClose:function(dp,$input){
+        $('#endTime').datetimepicker('setOptions',{minTime: $input.val()})
+    }
+});
+
+$('#endTime').datetimepicker({
+    datepicker: false,
+    format: 'H:i',
+    onClose:function(dp,$input){
+        $('#startTime').datetimepicker('setOptions',{maxTime: $input.val()})
+    }
+});
+
+$('#dateTime').datetimepicker({
+    format: 'Y-m-d H:i'
+});
